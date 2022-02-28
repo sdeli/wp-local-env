@@ -1,0 +1,6 @@
+!wp/
+wp/*
+!wp/wp-content/
+.DS_Store
+mysql/*
+!mysql/.gitkeep
