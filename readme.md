@@ -51,6 +51,10 @@ composer up
 
 ### 3. Prepare project files
 - Copy the production/staging wp installs wp-content/plugins, wp-content/themes, wp-content/uploads folders files into the ./wp/wp-content folder.
+- At this point you can install dependecies via composer if you have any 
+```sh
+composer install
+```
 - **Disbale all caching plugins on the production/staging before exporting the db.**
 - Export the db via phpmyadmin or however you can, as a result you should have a [file-name].sql file.
 - Move the [file-name].sql file to the ./assets folder
