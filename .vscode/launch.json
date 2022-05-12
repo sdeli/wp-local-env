@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Docker Listen for XDebug",
+      "type": "php",
+      "request": "launch",
+      "hostname": "localhost",
+      "port": 9003,
+      "log": true,
+      "pathMappings": {
+        "/var/www/html": "${workspaceRoot}/wp",
+      }
+    },
+  ]
+}
