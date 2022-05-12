@@ -6,6 +6,7 @@ which is extended by the official [phpmyadmin image](https://hub.docker.com/r/ph
  1. How you can start a clean/empty local instance
  2. How you can create a local clone of a production/staging wp install
  3. Commands to manage wp instance
+ 4. Xdebug integration
 
 ## You will need:
 - You will need docker and docker compose installed or docker desktop.
@@ -31,8 +32,8 @@ mv composer.phar /usr/local/bin/composer
   - delete wp folder content
   - if you have mysql folder delete it
   - check if there is no same containers already running
-- Create a ./docker-compose.yml from ./docker-compose.example
-- Add the values for the env variables where you see `user should fill out`.
+- Create a ./docker-compose.yml from ./docker-compose.example.yml
+- Add the values for the env variables where you see __"user should fill out"__.
 - Spin up wordpress
 ```sh
 # Before runnning the command go sure nothing is listening on port 80 and 8080.
@@ -100,13 +101,37 @@ mysql -u root -p
 source ./assets/[file-name].sql
 ```
 
-### 5. Clone is running**
+### 5. Clone is running
 At this point the living clone should be reachable at http://localhost and phpmyadmin at http://localhost:8080
 **But you might need to import theme settings**
   - For flatsome theme you need to go to admin dashboard/flatsome/backup and import, then backup the settings and import it into the clone
 - And you may need to add these lines to wp-config, if website loading is really slow and you see wp-cron in the wordpress logs:
 ```php
 define('DISABLE_WP_CRON', true);
+```
+
+## Xdebug setup
+- In this repo we are using __xdebug-3.1.4__
+- It's settings which make it work lie in __scripts/xdebug-3.1.4/xdebug.ini__
+- With ```composer debug:activate``` you can activate it, and from that point on it listens to any debugging client. (You need to run the command just once.)
+- For Vscode usage you need to have these settings in your launch.json
+```js
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Docker Listen for XDebug",
+      "type": "php",
+      "request": "launch",
+      "hostname": "localhost",
+      "port": 9003,
+      "log": true,
+      "pathMappings": {
+        "/var/www/html": "${workspaceRoot}/wp",
+      }
+    },
+  ]
+}
 ```
 
 ## Important Commands
@@ -128,4 +153,8 @@ composer purge
 
 # attach/log into a container
 docker exec -it [container-id] /bin/bash
+
+# activate debugger
+# you need to run this command just once in the lifetime of the wp container
+composer debug:activate
 ```

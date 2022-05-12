@@ -8,9 +8,9 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: wp
-      MYSQL_USER: user
-      MYSQL_PASSWORD: test
+      MYSQL_DATABASE: user fills out
+      MYSQL_USER: user fills out
+      MYSQL_PASSWORD: user fills out
     networks:
       - wpsite
 
@@ -41,9 +41,9 @@ services:
     volumes: ['./wp:/var/www/html/']
     environment:
       WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_NAME: wp
-      WORDPRESS_DB_USER: user
-      WORDPRESS_DB_PASSWORD: test
+      WORDPRESS_DB_NAME: user fills out
+      WORDPRESS_DB_USER: user fills out
+      WORDPRESS_DB_PASSWORD: user fills out
     networks:
       - wpsite
 networks:
